@@ -1,0 +1,13 @@
+#!/bin/bash
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  "$SCRIPTPATH/../changie_linux_amd64/changie" "$@" 
+elif [[ "$OSTYPE" == "darwin"* ]] && ["$(uname -m)" == "arm64"]; then
+  "$SCRIPTPATH/../changie_darwin_arm64/changie" "$@" 
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  "$SCRIPTPATH/../changie_darwin_amd64/changie" "$@" 
+else
+  echo "Unsupported OS: $OSTYPE"
+  exit 1
+fi
